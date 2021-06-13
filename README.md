@@ -17,7 +17,7 @@ class MyConfig extends AbstractConfig
     {
         return $this->get(
             self::MYKEY,
-            Expect::int()->required(),
+            Expect::int(),
         );
     }
 
