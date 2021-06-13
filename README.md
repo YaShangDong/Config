@@ -7,6 +7,7 @@ composer require yasd/config
 ```php
 use Nette\Schema\Expect;
 use YaSD\Config\AbstractConfig;
+use stdClass;
 
 class MyConfig extends AbstractConfig
 {
@@ -16,7 +17,21 @@ class MyConfig extends AbstractConfig
     {
         return $this->get(
             self::MYKEY,
-            Expect::int()->required()->castTo('int'),
+            Expect::int()->required(),
+        );
+    }
+
+    public function getMysql(): stdClass
+    {
+        return $this->get(
+            'mysql',
+            Expect::structure([
+                'host'     => Expect::string()->required(),
+                'port'     => Expect::int()->required(),
+                'user'     => Expect::string()->required(),
+                'password' => Expect::string()->required(),
+                'dbname'   => Expect::string()->required(),
+            ])
         );
     }
 }
@@ -28,6 +43,6 @@ $config = new MyConfig(__DIR__ . '/test.config.php');
 $ret = $config->reload()->getMyValue();
 var_dump($ret);
 
-$ret = $config->reload()->get(MyConfig::MYKEY);
+$ret = $config->getMysql();
 var_dump($ret);
 ```
