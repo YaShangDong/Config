@@ -1,0 +1,16 @@
+{
+    "name": "yasd/config",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "YaSD\\Config\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=8.0",
+        "hassankhan/config": "^2.2",
+        "nette/schema": "^1.2"
+    }
+}
